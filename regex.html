@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #d1d1d1;
+        }
+
+        * {
+            border: 0;
+            outline: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 80%;
+            border-radius: 1.2rem;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        form > div {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            gap: .6rem;
+        }
+
+        input, input::placeholder {
+            padding: 1rem .6rem;
+            border-radius: 12px;
+            color: #666666;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <form action="">
+        <div>
+            <label>UserName</label>
+            <input type="text" name="username" placeholder="Enter Username">
+            <span></span>
+        </div>
+            
+        <div>
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter Password">
+            <span></span>
+        </div>
+            
+        <div>
+            <label>Phone Number</label>
+            <input type="tel" name="number" placeholder="Enter Phone Number" value="+234">
+            <span></span>
+        </div>
+    </form>
+</body>
+
+<script>
+    const namePattern = /^[a-zA-Z0-9]{5,15}$/
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/
+    const phonePattern = /^\+234\d{10}$/
+
+    const nameField = document.querySelector('input[name="username"]');
+    const passwordField = document.querySelector('input[name="password"]');
+    const phoneField = document.querySelector('input[name="number"]');
+
+    const nameMessage = nameField.nextElementSibling;
+    const passwordMessage = passwordField.nextElementSibling;
+    const phoneMessage = phoneField.nextElementSibling;
+
+    nameField.addEventListener('input', () => {
+        if(namePattern.test(nameField.value)) {
+            nameMessage.textContent = 'Username is valid'
+            nameMessage.style.color = 'green'
+        }   else {
+            nameMessage.textContent = 'Username must be 5-15 letters/numbers'
+            nameMessage.style.color = 'red'
+        }
+    })
+
+    passwordField.addEventListener('input', () => {
+        if(passwordPattern.test(passwordField.value)) {
+            passwordMessage.textContent = 'Password is valid'
+            passwordMessage.style.color = 'green'
+        }   else {
+            passwordMessage.textContent = 'Password should be 8+ chars, 1 uppercase, 1 digit, 1 special char'
+            passwordMessage.style.color = 'red'
+        }
+    })
+
+    phoneField.addEventListener('input', () => {
+        if(phonePattern.test(phoneField.value)) {
+            phoneMessage.textContent = 'Phone Number is valid'
+            phoneMessage.style.color = 'green'
+        }   else {
+            phoneMessage.textContent = 'Use +234 followed by 10 digits'
+            phoneMessage.style.color = 'red'
+        }
+    })
+
+</script>
+</html>
