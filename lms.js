@@ -35,7 +35,7 @@ class Library {
 
     display() {
         console.log(chalk.red('\n Displaying all books \n'))
-        console.table(this.books)
+        console.table(this.books.filter(b => b.available === 'yes'))
     }
 }
 
@@ -94,6 +94,11 @@ pLibrary.borrow(b12)
 pLibrary.borrow(b1)
 pLibrary.borrow(b8)
 pLibrary.borrow(b20)
+pLibrary.borrow(b22)
+pLibrary.borrow(b11)
+pLibrary.borrow(b6)
+pLibrary.borrow(b4)
+pLibrary.borrow(b19)
 
 pLibrary.return(b12)
 pLibrary.return(b20)

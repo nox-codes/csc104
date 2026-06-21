@@ -76,6 +76,10 @@
         .cart.show .clear_cart_btn {
             align-self: flex-end;
         }
+
+        .cart.show .tprice {
+            align-self: flex-start;
+        }
     </style>
 </head>
 <body>
@@ -85,9 +89,11 @@
 
     <div class="cart">
 
+        <div class="tprice"><p>$ 0</p></div>
         <a class="clear_cart_btn">Clear all</a>
 
         <div class="inner_cart"></div>
+
 
     </div>
 
@@ -129,18 +135,30 @@
 
     function loadCart() {
         cart.innerHTML = ''
-    
+
+        
         cart_arr.forEach(item => {
             const cartItem = document.createElement('div')
             cartItem.className = 'cart-item'
             cartItem.textContent = 'Cart Product'
             cartItem.innerHTML = `
-                <p>${item.name}</p>
-                <p>$ ${item.price}</p>
-                <button class="btn rem-btn" data-id="${item.id}">Remove from Cart</button>
+            <p>${item.name}</p>
+            <p>$ ${item.price}</p>
+            <button class="btn rem-btn" data-id="${item.id}">Remove from Cart</button>
             `
             cart.appendChild(cartItem)
         })
+
+        console.log(cart_arr)
+
+        const tPrice = cart_arr.reduce((sum, item) => sum + item.price, 0)
+
+        const totalPricetext = document.querySelector('.tprice')
+
+        totalPricetext.innerHTML = `
+            <p>$ ${tPrice}</p>
+        `
+
     }
 
     productContainer.addEventListener('click', (e) => {
@@ -156,7 +174,7 @@
     cart.addEventListener('click', (e) => {
         if(e.target.classList.contains('rem-btn')) {
             const id = Number(e.target.dataset.id)
-            const index = cart_arr.find(item => item.id === id)
+            const index = cart_arr.findIndex(item => item.id === id)
 
             if(index !== -1) {
                 cart_arr.splice(index, 1)
