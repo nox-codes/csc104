@@ -22,15 +22,21 @@ class Library {
     }
 
     borrow(book, available) {
-        book.available = 'no'
-
-        console.log(chalk.yellow(`'${book.title}' has been successfully borrowed. \n`))
+        if(book.available === 'yes') {
+            book.available = 'no'
+            console.log(chalk.yellow(`'${book.title}' has been successfully borrowed. \n`))
+        }   else {
+                console.log('This book has already been borrowed')
+        }
     }
 
     return(book, available) {
-        book.available = 'yes'
-
-        console.log(chalk.blue(`'${book.title}' has been successfully returned. \n`))
+        if(book.available === 'no') {
+            book.available = 'yes'
+            console.log(chalk.blue(`'${book.title}' has been successfully returned. \n`))
+        }   else {
+                console.log('This book has been returned')
+        }
     }
 
     display() {
